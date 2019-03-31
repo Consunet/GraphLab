@@ -1,0 +1,30 @@
+<meta charset="utf-8" />
+
+<body bgcolor=black />
+
+<script src=node_modules/@consunet/graph-lab/graph.js></script>
+
+<script>
+
+var gr = new graph();
+
+var offset = 0;
+
+gr.insertFunction(function(x, z) {return window.Amplitude * Math.cos(x + offset) * Math.cos(z + offset);}, 'cos(x) \u00d7 cos(z)');
+gr.insertFunction(function(x, z) {return window.Amplitude * Math.exp(x) * z / 100;}, 'exp(x) \u00d7 z');
+
+gr.insertSwitchPanel();
+gr.createParameterBlock();
+gr.createParameter('Amplitude', 0, 1, 0.01, 1);
+
+gr.range_x(Math.PI * -2, Math.PI * 2, Math.PI * 0.125);
+gr.range_z(Math.PI * -2, Math.PI * 2, Math.PI * 0.125);
+gr.range_y(-4, 4);
+
+gr.scaling = 0.4;
+gr.reRoll(-0.5, -0.5);
+
+setInterval(function() {gr.reGraph(); offset += 0.04;}, 100);
+
+</script>
+
