@@ -1,6 +1,5 @@
 # GraphLab
 
-Foobar is a Python library for dealing with word pluralization.
 GraphLab is a JavaScript library, which solves the following problems:
 1. Visualises mathematical functions in 3D space.
 2. Shows more than just one function for comparison.
