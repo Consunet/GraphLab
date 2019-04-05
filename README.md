@@ -36,9 +36,11 @@ myGraph.range_x(from, to, optional_step);
 myGraph.range_y(from, to, optional_step);
 myGraph.range_z(from, to, optional_step);
 myGraph.axisNames('X', 'Y', 'Z');
-myGraph.reGraph(); // to draw it for the first time
+myGraph.draw(); // to draw it for the first time
 // or
-setInterval (function () {gr . reGraph ();}, 100); // if you wish the graph to be animated every 100 milliseconds
+setInterval(function() {gr.draw ();}, 100); // if you wish the graph to be animated every 100 milliseconds
+// or simply
+myGraph.animate(100); // with optional myGraph.animate(100, myFunction) to update some global parameters
 // enjoy....
 
 

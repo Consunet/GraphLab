@@ -26,7 +26,11 @@
 //   enjoy....
 /////////////////////////////////////////////////////////
 
-var graph = function(div_id) {
+var graph = function(parameter_1, parameter_2) {
+  if (typeof(parameter_1) === 'string') this.div_id = parameter_1;
+  if (typeof(parameter_2) === 'string') this.div_id = parameter_2;
+  if (typeof(parameter_1) === 'object') this.setup = parameter_1;
+  if (typeof(parameter_2) === 'object') this.setup = parameter_2;
   this.zee = 0;
   this.colours = ['red', 'green', 'yellow', 'lime', 'fuchsia', 'teal', 'orange', 'aqua', 'maroon', 'olive', 'white', 'purple', 'silver', 'gold'];
   this.functions = {};
@@ -37,6 +41,7 @@ var graph = function(div_id) {
   this.x_tick = 1; this.z_tick = 1; this.y_tick = 1;
   this.x_shift = 0; this.y_shift = 0; this.z_shift = 0;
   this.x_name = 'X'; this.y_name = 'Y'; this .z_name = 'Z';
+  this.axis_font = '96px arial';
   this.centre = false;
   this.x_axis = true; this.y_axis = true; this.z_axis = true;
   this.dimensions = function(x, y, z) {
@@ -167,7 +172,7 @@ var graph = function(div_id) {
     }
   };
   this.reGraph = function() {
-    if (div_id === undefined) {
+    if (this.div_id === undefined) {
       if (this.canvas.offsetWidth > 0) this.canvas.width = this.canvas.offsetWidth;
       if (this.canvas.offsetHeight > 0) this.canvas.height = this.canvas.offsetHeight;
     }
@@ -190,12 +195,13 @@ var graph = function(div_id) {
     var keys = Object.keys(this.functions);
     for (var ind in keys) {if (this.function_switches [keys [ind]]) this.graphFunction(keys [ind], cw);}
     this.ctx.fillStyle = 'white';
-    this.ctx.font = '96px arial';
+    this.ctx.font = this.axis_font;
     this.text(ch, yw, zw, this.x_name);
     this.text(xw, ch, zw, this.y_name);
     this.text(xw, yw, ch, this.z_name);
     this.ctx.restore();
   };
+  this.draw = this.reGraph;
   var graph = this;
   this.insertFunction = function(f, name, colour) {
     this.functions [name] = f;
@@ -242,12 +248,12 @@ var graph = function(div_id) {
   this.canvas.onwheel = function(e) {
     e.preventDefault();
     var delta = e.deltaX + e.deltaY + e.deltaZ;
-    graph.scaling *= Math.pow(2, - delta / 12);
-    // graph.zee += delta * 100;
+    if (graph.z_scaling) graph.zee += delta * 100;
+    else graph.scaling *= Math.pow(2, - delta / 12);
     graph.reGraph();
   };
-  if (div_id !== undefined) {
-    this.div = document.getElementById(div_id);
+  if (this.div_id !== undefined) {
+    this.div = document.getElementById(this.div_id);
     this.div.appendChild(this.canvas);
   } else document.body.appendChild(this.canvas);
   if (this.canvas.offsetWidth > 0) this.canvas.width = this.canvas.offsetWidth;
@@ -294,6 +300,24 @@ var graph = function(div_id) {
     this.parameter_block.appendChild(span);
     this.parameter_block.appendChild(document.createElement('br'));
   };
+  this.animate = function (delay, f) {
+    if (f === undefined) setInterval(function() {graph.reGraph();}, delay);
+    else setInterval (function() {f(), graph.reGraph();}, delay);
+  };
+  if (this.setup !== undefined) {
+    console.log(this.setup);
+    for (var key in this.setup) {
+      var value = this.setup[key];
+      switch (key) {
+        case 'roll': this.alpha = value; this.reAlpha(value); break;
+        case 'yaw': this.beta = value; this.reBeta(value); break;
+        case 'range_y': this.range_y(value['from'], value['to'], value['tick']); break;
+        case 'range_x': this.range_x(value['from'], value['to'], value['tick']); break;
+        case 'range_z': this.range_z(value['from'], value['to'], value['tick']); break;
+        default: this[key] = value; break;
+      }
+    }
+  }
 };
 
 if (typeof module !== 'undefined') module.exports.graph = graph;
