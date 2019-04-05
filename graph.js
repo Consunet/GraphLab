@@ -305,7 +305,6 @@ var graph = function(parameter_1, parameter_2) {
     else setInterval (function() {f(), graph.reGraph();}, delay);
   };
   if (this.setup !== undefined) {
-    console.log(this.setup);
     for (var key in this.setup) {
       var value = this.setup[key];
       switch (key) {
