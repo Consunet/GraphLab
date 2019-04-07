@@ -19,5 +19,8 @@
     "Lab"
   ],
   "author": "Robert Wolf",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "jslint-node": "^1.2.8"
+  }
 }
