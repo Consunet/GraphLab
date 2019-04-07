@@ -105,10 +105,10 @@ var graph = function (parameter_1, parameter_2) {
             : z
         );
     };
-    this.axisNames = function (x, y, z) {
+    this.axisNames = function (x, z, y) {
         this.x_name = x;
-        this.y_name = z;
-        this.z_name = y;
+        this.y_name = y;
+        this.z_name = z;
     };
     this.range_x = function (from, to, tick) {
         this.width = (to - from) / 2;
