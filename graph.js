@@ -71,40 +71,6 @@ var graph = function (parameter_1, parameter_2) {
     this.x_axis = true;
     this.y_axis = true;
     this.z_axis = true;
-    this.dimensions = function (x, y, z) {
-        this.width = x;
-        this.height = (
-            y === undefined
-            ? x
-            : y
-        );
-        this.depth = (
-            z === undefined
-            ? x
-            : z
-        );
-    };
-    this.shifts = function (x, y, z) {
-        this.x_shift = x;
-        this.y_shift = (
-            y === undefined
-            ? x
-            : y
-        );
-        this.z_shift = (
-            z === undefined
-            ? x
-            : z
-        );
-    };
-    this.ticks = function (x, z) {
-        this.x_tick = x;
-        this.z_tick = (
-            z === undefined
-            ? x
-            : z
-        );
-    };
     this.axisNames = function (x, z, y) {
         this.x_name = x;
         this.y_name = y;
@@ -146,9 +112,6 @@ var graph = function (parameter_1, parameter_2) {
         if (zz <= 0) {
             return;
         }
-        if (zz === 0) {
-            zz = 1;
-        }
         xx = this.screen * (xx + this.drift_x) / zz;
         yy = this.screen * (yy - this.drift_y) / zz;
         this.ctx.lineTo(xx, -yy);
@@ -161,9 +124,6 @@ var graph = function (parameter_1, parameter_2) {
         zz += this.zee;
         if (zz <= 0) {
             return;
-        }
-        if (zz === 0) {
-            zz = 1;
         }
         xx = this.screen * (xx + this.drift_x) / zz;
         yy = this.screen * (yy - this.drift_y) / zz;
@@ -435,7 +395,7 @@ var graph = function (parameter_1, parameter_2) {
     this.parameter_block = null;
     this.createParameterBlock = function (div) {
         this.parameter_block = (
-            div === null
+            div == null
             ? null
             : document.getElementById(div)
         );
