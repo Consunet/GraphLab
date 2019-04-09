@@ -1,6 +1,6 @@
 {
   "name": "@consunet/graph-lab",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Visualises mathematical functions in 3D space for comparison.",
   "main": "index.js",
   "scripts": {
@@ -20,10 +20,8 @@
   ],
   "author": "Robert Wolf",
   "license": "GPL-3.0",
-  "dependencies": {
-    "jslint-node": "^1.2.8"
-  },
   "devDependencies": {
+    "jslint-node": "^1.2.8",
     "jest": "^24.7.1",
     "jest-canvas-mock": "^2.0.0-beta.1"
   }
