@@ -196,16 +196,27 @@ test("Mouse onwheel.", function () {
 
 test("Create parameter block.", function () {
   var myGraph = new graph("graph_id");
-  myGraph.createParameter("Amplitude", 0, 1, 0.01);
+  myGraph.createParameter("Amplitudes", 0, 1, 0.01);
   myGraph.createParameterBlock();
   myGraph.createParameterBlock("graph_id");
-  myGraph.createParameter("Amplidude", 0, 1, 0.01, 0.5);
+  myGraph.createParameter("Amplitude", 0, 1, 0.01, 0.5);
   myGraph.createParameter("Sonda");
   myGraph.createParameter("Sputnik", 1);
   myGraph.createParameter("Voyager", 1, 2);
+  expect(Amplitude).toBe(0.5);
+  document.getElementById("Amplitude_slider").oninput();
 });
 
 test("Document body on context should return false.", function () {
   new graph();
   expect(document.body.oncontextmenu()).toBe(false);
+});
+
+test("Animation", function () {
+  var si = setInterval;
+  setInterval = function (f, d) {f();};
+  var myGraph = new graph();
+  myGraph.animate(100);
+  myGraph.animate(120, jest.fn());
+  setInterval = si;
 });

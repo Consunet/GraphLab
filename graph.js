@@ -390,7 +390,7 @@ var graph = function (parameter_1, parameter_2) {
     this.parameter_block = null;
     this.createParameterBlock = function (div) {
         this.parameter_block = (
-            div == null
+            div === undefined
             ? null
             : document.getElementById(div)
         );
