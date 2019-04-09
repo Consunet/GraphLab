@@ -333,11 +333,6 @@ var graph = function (parameter_1, parameter_2) {
             checkbox.onchange = function () {
                 grapher.function_switches[this.id] = this.checked;
                 grapher.reGraph();
-                speaker(this.id + (
-                    this.checked
-                    ? "engaged"
-                    : "disengaged"
-                ));
             };
             div.appendChild(checkbox);
             var label = document.createElement("span");
@@ -494,10 +489,3 @@ var module;
 if (module !== undefined) {
     module.exports.graph = graph;
 }
-
-var speaker = function (word) {
-    word = new SpeechSynthesisUtterance(word);
-    word.voice = speechSynthesis.getVoices()[1];
-    word.volume = 0.2;
-    speechSynthesis.speak(word);
-};
