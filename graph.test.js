@@ -89,15 +89,19 @@ test("Inserting canvas into specified div (version 3).", function () {
 });
 
 test("Inserting canvas into <body> (version without JSON-based setup).", function () {
+  var g = document.body.appendChild;
   document.body.appendChild = jest.fn();
   var myGraph = new graph();
   expect(document.body.appendChild).toHaveBeenCalledWith(myGraph.canvas);
+  document.body.appendChild = g;
 });
 
 test("Inserting canvas into <body> (version with JSON-based setup).", function () {
+  var g = document.body.appendChild;
   document.body.appendChild = jest.fn();
   var myGraph = new graph({});
   expect(document.body.appendChild).toHaveBeenCalledWith(myGraph.canvas);
+  document.body.appendChild = g;
 });
 
 test("Inserting functions", function () {
@@ -144,9 +148,13 @@ test("Drawing in <div>.", function () {
 });
 
 test("Insert switch panel into <body>.", function () {
+  var g = document.body.appendChild;
+  document.body.appendChild = jest.fn();
   var myGraph = new graph();
   myGraph.insertFunction(jest.fn(), "sonda");
   myGraph.insertSwitchPanel();
+  expect(document.body.appendChild).toBeCalled();
+  document.body.appendChild = g;
 });
 
 test("Insert switch panel into specified div.", function () {
