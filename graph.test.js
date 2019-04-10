@@ -157,12 +157,9 @@ test("Insert switch panel into specified div.", function () {
   myGraph.insertFunction(jest.fn(), "sonda");
   myGraph.insertSwitchPanel();
   var checkbox = document.getElementById("sonda");
-  SpeechSynthesisUtterance = jest.fn();
-  speechSynthesis = {getVoices: jest.fn(), speak: jest.fn()};
-  speechSynthesis.getVoices.mockReturnValue([1, 2]);
-  checkbox.onchange();
   checkbox.checked = false;
   checkbox.onchange();
+  expect(myGraph.function_switches["sonda"]).toBe(false);
 });
 
 test("Initial canvas width and height might need to be set automatically.", function () {
