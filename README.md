@@ -5,7 +5,7 @@ GraphLab is a JavaScript library, which solves the following problems:
 2. Shows more than just one function for comparison.
 3. Allows those functions to be written in JavaScript (rather than as a mathematic formula) for subsequent copy-and-paste to another program (i.e. written in Java, C++, etc.).
 4. Allows for using additional parameters for functions and see how they change in real time.
-5. Enables the functions to be animated in case they relay on parameters that change continuously in time.
+5. Enables the functions to be animated in case they rely on parameters that change continuously in time.
 
 ## Installation
 
