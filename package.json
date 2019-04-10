@@ -1,6 +1,6 @@
 {
   "name": "@consunet/graph-lab",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Visualises mathematical functions in 3D space for comparison.",
   "main": "index.js",
   "scripts": {
