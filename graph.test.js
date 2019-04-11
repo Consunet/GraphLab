@@ -117,6 +117,8 @@ test("Inserting functions", function () {
 
 test("Drawing", function () {
   var myGraph = new graph();
+  var lineTo = jest.fn();
+  myGraph.ctx.lineTo = lineTo;
   myGraph.reRoll(Math.PI * -0.5, 0);
   myGraph.zee = -2500;
   myGraph.colours = ["red"];
@@ -132,19 +134,15 @@ test("Drawing", function () {
   myGraph.function_switches["voyager"] = false;
   myGraph.canvas.onmousemove({buttons: 2, movementX: 2, movementY: -1});
   myGraph.canvas.onmousemove({buttons: 3, movementX: 2, movementY: -1});
+  expect(lineTo).toHaveBeenCalled();
+  lineTo = jest.fn();
+  myGraph.ctx.lineTo = lineTo;
   delete myGraph.ctx;
   myGraph.draw();
   Object.defineProperty(myGraph.canvas, "offsetWidth", {value: 100, writable: false});
   Object.defineProperty(myGraph.canvas, "offsetHeight", {value: 100, writable: false});
   myGraph.draw();
-});
-
-test("Drawing in <div>.", function () {
-  var g = document.getElementById;
-  buildDiv("graph_id");
-  var myGraph = new graph("graph_id");
-  myGraph.draw();
-  document.getElementById = g;
+  expect(lineTo).not.toHaveBeenCalled();
 });
 
 test("Insert switch panel into <body>.", function () {
